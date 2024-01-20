@@ -6,7 +6,7 @@ export const apiRoutes =(app)=>{
 
 
     app.use(router)
-    //app.use(cartRouter)
+   
 
     //------------------------------
     app.use('*',(req,res,next)=>{
