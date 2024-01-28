@@ -8,6 +8,9 @@ import { categoryModel } from "../Models/category.js"
 const addcategory= catchAsyncError(async (req,res,next)=>{
     // req.body.user=req.user._id
     req.body.slug =slugify(req.body.name)
+    if(req.file){
+        req.body.img =req.file.filename
+    }
     const category =new categoryModel(req.body)
     await category.save()
     res.json({message:"success",category})
@@ -34,6 +37,9 @@ const deletecategory =catchAsyncError(async (req,res,next)=>{
 const updatecategory =catchAsyncError(async (req,res,next)=>{
     const {id} =req.params
   if(req.body.name) req.body.slug =slugify(req.body.name)
+  if(req.file){
+    req.body.img =req.file.filename
+}
     const category =await categoryModel.findByIdAndUpdate(id,req.body)
     !category && next(new AppError("category Not Found",403))
     category && res.json({message:"success",category})

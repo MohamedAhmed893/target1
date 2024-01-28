@@ -5,10 +5,12 @@ import { catchAsyncError } from "../middleware/catchAsyncError.js"
 
 
 const addproduct= catchAsyncError(async (req,res,next)=>{
-    // req.body.user=req.user._id
+    req.body.user=req.user._id
     req.body.slug =slugify(req.body.title)
-    // req.body.imgCover=req.files.imageCover[0].filename
-    // req.body.imgs=req.files.images.map(ele=>ele.filename)
+if(req.files){
+    req.body.imgCover=req.files.imageCover[0].filename
+    req.body.imgs=req.files.images.map(ele=>ele.filename)
+}
     const product =new productModel(req.body)
     await product.save()
     res.json({message:"success",product})
@@ -34,6 +36,10 @@ const deleteProduct =catchAsyncError(async (req,res,next)=>{
 })
 const updateProduct =catchAsyncError(async (req,res,next)=>{
     const {id} =req.params
+    if(req.files){
+        req.body.imgCover=req.files.imageCover[0].filename
+        req.body.imgs=req.files.images.map(ele=>ele.filename)
+    }
   if(req.body.title) req.body.slug =slugify(req.body.title)
     const product =await productModel.findByIdAndUpdate(id,req.body)
     !product && next(new AppError("Product Not Found",403))
