@@ -5,5 +5,5 @@ function generateErrorMessage(statusCode, message) {
     }
   }
   export default {
-    generateErrorMessage,
+    generateErrorMessage
   }

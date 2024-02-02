@@ -20,6 +20,18 @@ router.post('/signup',async(req,res)=>{
 })
 
 
+router.get("/user/:id", async (req, res) => {
+    const _id = req.params.id;
+    const user = await userController.getById(_id);
+    if(!user) {
+      return res.send({
+        message: "User not Found!"
+      })
+    }
+    res.send(user);
+  });
+
+
 router.post('/signin',async(req,res)=>{
     const payload ={
         email:req.body.email,
@@ -34,7 +46,6 @@ router.post('/signin',async(req,res)=>{
     })
 })
 router.post('/forgetpassword',async(req,res)=>{
-    console.log("tsss")
     let payload ={
         email:req.body.email
     }
@@ -47,10 +58,8 @@ router.post('/forgetpassword',async(req,res)=>{
     })
 })
 
-router.post('/reset-password',async(req,res)=>{
+router.put('/reset-password',async(req,res)=>{
     let payload ={
-        //na 4aka fe 7war el email 7asah momken yeb2a params
-        // etracyyyyyyyyyyyyyyyyy el sob7 el 8alta hena at2reban
         email:req.body.email,
         otp:req.body.otp,
         password:req.body.password,

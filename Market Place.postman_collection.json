@@ -1,0 +1,729 @@
+{
+	"info": {
+		"_postman_id": "50b0a413-d860-47b8-a17a-a54eef0e5f29",
+		"name": "Market Place",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22898957",
+		"_collection_link": "https://grey-space-666741.postman.co/workspace/odc~98c7acff-6dd1-42d6-a9ff-65d19f9ca555/collection/22898957-50b0a413-d860-47b8-a17a-a54eef0e5f29?action=share&source=collection_link&creator=22898957"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Log In",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"moo@gmail.com\",\r\n    \"password\":\"Test1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/signin",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign Up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\":\"Mohamed Ramadan\",\r\n    \"email\":\"mohamedRamadanSaudi@gmail.com\",\r\n    \"password\":\"Test1234\",\r\n    \"confirmedPassword\":\"Test1234\",\r\n    \"role\":\"CLIENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forget-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mohamedRamadanSaudi@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/forgetpassword",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"forgetpassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"TEST1234\",\r\n    \"confirmedPassword\":\"TEST1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/reset-password",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Messaging",
+			"item": [
+				{
+					"name": "Delete Message",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/messages/65b554326afe7c0168985f85",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"messages",
+								"65b554326afe7c0168985f85"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Conversation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/conversations/65b554326afe7c0168985f83",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"conversations",
+								"65b554326afe7c0168985f83"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"senderId\":\"65b2a4606d45ba504f2c1f2e\",\r\n    \"receiverId\": \"65a83137127bdc5e9a27a3e9\",\r\n    \"productId\": \"65b2a06fa539b6ee3de652be\",\r\n    \"content\": \"test for delete\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/messages",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Message",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Hello, World!!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/messages/65b5509c5527c0a722ad813e",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"messages",
+								"65b5509c5527c0a722ad813e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Conversation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/conversations/65b2a4606d45ba504f2c1f2e/65a8308727f6e99e193a33e6",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"conversations",
+								"65b2a4606d45ba504f2c1f2e",
+								"65a8308727f6e99e193a33e6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "View Cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add to cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjMxMzg0YmNiMzgzMmJhZmVjZmI2YSIsImVtYWlsIjoiaGdoYmhOb29yQGdtYWlsLmNvbSIsImZ1bGxOYW1lIjoiTm9yaGFuIEFobWVkIFNhYmVyICA8MyIsInJvbGUiOiJTRUxMRVIiLCJpYXQiOjE3MDYyMzQ3NTYsImV4cCI6MTcwNjMyMTE1Nn0.ciTIYnrlQUNA6zwvqffveXk9w1WNRptXQKFZg12OALI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"productId\": \"65b2d2eb6e315996f74743f2\",\r\n  \"quantity\": 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/cart",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Item from cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJjMDQxZWIzZWI4NDVmNDc1N2EyMjEiLCJlbWFpbCI6InRva2E2QGdtYWlsLmNvbSIsImZ1bGxOYW1lIjoiTW9oYW1lZCBSYW1hZGFuIiwicm9sZSI6IkNMSUVOVCIsImlhdCI6MTcwNjgyMDYzOCwiZXhwIjoxNzA2OTA3MDM4fQ.d4W3eeO2JAibwU5Ux7FYq5QPZwP-gh5Nl55lnhdiy4Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/deleteItem/65b40224b24a2f485609c488/65adb9a8a8dfa4a8c19b3bd3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deleteItem",
+								"65b40224b24a2f485609c488",
+								"65adb9a8a8dfa4a8c19b3bd3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Add Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "tv15",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "this is good",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "3000",
+									"type": "text"
+								},
+								{
+									"key": "imageCover",
+									"type": "file",
+									"src": "/C:/Users/Mohamed Ahmed/Desktop/images.jpg"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": [
+										"/C:/Users/Mohamed Ahmed/Desktop/images (1).jpg",
+										"/C:/Users/Mohamed Ahmed/Desktop/images.jpg"
+									]
+								},
+								{
+									"key": "quantity",
+									"value": "30",
+									"type": "text"
+								},
+								{
+									"key": "sold",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "rating",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "rateAverage",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Spacfic Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/products/65b8d3bc97b3456546774629",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"65b8d3bc97b3456546774629"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "aomq",
+									"type": "text"
+								},
+								{
+									"key": "imageCover",
+									"type": "file",
+									"src": "/C:/Users/Mohamed Ahmed/Desktop/images.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/products/65b8d3bc97b3456546774629",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"65b8d3bc97b3456546774629"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/products/65b8d3bc97b3456546774629",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"65b8d3bc97b3456546774629"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Add Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "sumsung",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Mohamed Ahmed/Desktop/images.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJjMDQxZWIzZWI4NDVmNDc1N2EyMjEiLCJlbWFpbCI6InRva2E2QGdtYWlsLmNvbSIsImZ1bGxOYW1lIjoiTW9oYW1lZCBSYW1hZGFuIiwicm9sZSI6IkNMSUVOVCIsImlhdCI6MTcwNjgyMDYzOCwiZXhwIjoxNzA2OTA3MDM4fQ.d4W3eeO2JAibwU5Ux7FYq5QPZwP-gh5Nl55lnhdiy4Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sapacific category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJjMDQxZWIzZWI4NDVmNDc1N2EyMjEiLCJlbWFpbCI6InRva2E2QGdtYWlsLmNvbSIsImZ1bGxOYW1lIjoiTW9oYW1lZCBSYW1hZGFuIiwicm9sZSI6IkNMSUVOVCIsImlhdCI6MTcwNjgyMDYzOCwiZXhwIjoxNzA2OTA3MDM4fQ.d4W3eeO2JAibwU5Ux7FYq5QPZwP-gh5Nl55lnhdiy4Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category/65ae2c7ca847fc68baee4ab3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"65ae2c7ca847fc68baee4ab3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJjMDQxZWIzZWI4NDVmNDc1N2EyMjEiLCJlbWFpbCI6InRva2E2QGdtYWlsLmNvbSIsImZ1bGxOYW1lIjoiTW9oYW1lZCBSYW1hZGFuIiwicm9sZSI6IkNMSUVOVCIsImlhdCI6MTcwNjgyMDYzOCwiZXhwIjoxNzA2OTA3MDM4fQ.d4W3eeO2JAibwU5Ux7FYq5QPZwP-gh5Nl55lnhdiy4Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "qwejoi",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Mohamed Ahmed/Desktop/images.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/category/65ae2c7ca847fc68baee4ab3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"65ae2c7ca847fc68baee4ab3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Catgory",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category/65b8d3bc97b3456546774629",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"65b8d3bc97b3456546774629"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cartId\": \"65adba75a8dfa4a8c19b3bd5\",\r\n  \"shippingInfo\": {\r\n    \"name\": \"3am 3ezat\",\r\n    \"Address\": \"Helwan\"\r\n  },\r\n  \"payment\": {\r\n    \"cardNumber\": 1234567890123456,\r\n    \"expiryDate\": \"2025-01-01\",\r\n    \"CVV\": \"123\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/order",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
