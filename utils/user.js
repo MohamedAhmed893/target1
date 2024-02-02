@@ -17,7 +17,6 @@ function generateToken(user) {
     }
   );
   user.token = token;
-  console.log(user.token)
 }
 
 
