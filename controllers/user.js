@@ -45,6 +45,7 @@ async function isOtpExist(id, otp) {
 async function saveNewPassword(email, password) {
   const newPassword = userUtils.ecncryptPassword(password);
   const result = await User.updateOne({ 'email': email }, { $set: { 'password': newPassword } })
+
   if (!result) {
     return error.generateErrorMessage(500, "Internal server Error");
   }
@@ -139,3 +140,4 @@ export default {
   frogetPassword,
   resetPassword,
 };
+

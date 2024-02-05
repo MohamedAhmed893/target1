@@ -11,4 +11,5 @@ productRouter.get("/:id", auth, getSpacificProduct);
 productRouter.put("/:id", auth, uploadMixOfFile(arreyOfFields, 'product'), updateProduct);
 productRouter.delete("/:id", auth, deleteProduct);
 
+
 export default productRouter;

@@ -148,7 +148,6 @@ router.delete("/api/conversations/:conversationId", auth, async (req, res) => {
     // Find the conversation to be deleted
     const conversation = await Conversation.findById(conversationId);
     // Delete associated messages
-
     await Message.deleteMany({ _id: { $in: conversation.messages } });
 
     // Delete the conversation
