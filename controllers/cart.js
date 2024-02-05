@@ -111,11 +111,11 @@ async function deleteItem(req, res, next) {
       return next(new AppError("Cart not found", 404));
     }
 
-    const itemIndex = cart.items.findIndex(
-      (item) => item._id.toString() === itemId
+    let itemIndex = cart.items.findIndex(
+      (item) => item.id === itemId
     );
 
-    if (itemIndex === -1) {
+    if (itemIndex == -1) {
       return next(new AppError("Item not found in cart", 404));
     }
 
@@ -128,7 +128,9 @@ async function deleteItem(req, res, next) {
 
     res.json({ message: "Item deleted successfully", cart });
   } catch (error) {
-    //   return next(new AppError("Something went wrong", 500));
+    res.status(400).json({
+      message: "Internal server error"
+    })
   }
 }
 async function cartdb() {

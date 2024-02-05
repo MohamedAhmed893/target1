@@ -1,7 +1,7 @@
 import otpUtils from "../utils/otp.js";
 import userUtils from "../utils/user.js";
 import Otp from "../Models/otp.js";
-import User from "../Models/client.js";
+import User from "../Models/User.js";
 import error from "../utils/generateErrorMessage.js";
 async function resetPassword({ otp, email, password, confirmedPassword }) {
   try {
@@ -10,9 +10,8 @@ async function resetPassword({ otp, email, password, confirmedPassword }) {
       const otpRecord = await isOtpExist(user[0]._id, otp);
       if (otpRecord) {
         if (password == confirmedPassword) {
-          const result = await saveNewPassword(user, password);
+          const result = await saveNewPassword(user[0].email, password);
           if (result) {
-            //handly hena error message
             await Otp.deleteOne({ _id: otpRecord._id });
             return error.generateErrorMessage(
               200,
@@ -43,9 +42,10 @@ async function isOtpExist(id, otp) {
   return false;
 }
 
-async function saveNewPassword(user, password) {
-  user.password = userUtils.ecncryptPassword(password);
-  const result = await User.save({ email, password });
+async function saveNewPassword(email, password) {
+  const newPassword = userUtils.ecncryptPassword(password);
+  const result = await User.updateOne({ 'email': email }, { $set: { 'password': newPassword } })
+
   if (!result) {
     return error.generateErrorMessage(500, "Internal server Error");
   }
@@ -53,14 +53,10 @@ async function saveNewPassword(user, password) {
   return { value: result };
 }
 async function frogetPassword({ email }) {
-  console.log("bsssss");
   try {
     const user = await isExist({ email });
-    console.log("user", user);
     if (user) {
-      console.log("aywaaa");
       const generatedOtp = await otpUtils.generateOtp(user);
-      console.log("genrated otp", generatedOtp);
       if (generatedOtp) {
         return error.generateErrorMessage(200, "OTP generated succesfully");
       }
@@ -86,11 +82,10 @@ async function signUp({ fullName, email, password, confirmedPassword, role }) {
     if (!userUtils.validPassword(password)) {
       return error.generateErrorMessage(
         403,
-        "Password must contain : at least 8 characters contain unique chaaracter contain uppercase letter"
+        " password must be at least eight characters, at least one letter, one number and one special character"
       );
     }
     if (!(await isExist({ email }))) {
-      console.log("alllloo");
       if (password == confirmedPassword) {
         password = userUtils.ecncryptPassword(password);
         const user = await User.create({ fullName, email, password, role });
@@ -116,12 +111,11 @@ async function signin({ email, password }) {
     if (!email || !password) {
       return error.generateErrorMessage(400, "Missing Data");
     }
-    const user = await isExist({ email });
-    if (user) {
+    let user = await isExist({ email });
+    if (user[0]) {
       if (await userUtils.comparePassword(password, user[0].password)) {
-        console.log("na hena");
-        userUtils.generateToken(user);
-        return { value: user };
+        userUtils.generateToken(user[0]);
+        return { value: user[0] };
       }
       return error.generateErrorMessage(401, "Invalid password");
     }
@@ -134,12 +128,9 @@ async function signin({ email, password }) {
 
 async function isExist(email) {
   const user = await User.find(email);
-  console.log(user);
   if (user.length) {
-    console.log("true lel length ");
     return user;
   }
-  console.log("mafee4 le length ya3n me4 mawgood");
   return false;
 }
 
@@ -149,3 +140,4 @@ export default {
   frogetPassword,
   resetPassword,
 };
+

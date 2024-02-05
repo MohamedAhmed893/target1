@@ -2,11 +2,12 @@ import express from "express";
 import { addcategory, deletecategory, getAllcategory, getSpacificcategory, updatecategory } from "../../controllers/category.js";
 import { uploadFile } from "../../middleware/uploadFile.js";
 
-const categoryRouter =express.Router()
-categoryRouter.post("/",uploadFile('image','category'),addcategory);
-categoryRouter.get("/", getAllcategory);
-categoryRouter.get("/:id", getSpacificcategory);
-categoryRouter.put("/:id",uploadFile('image','category'), updatecategory);
-categoryRouter.get("/:id", deletecategory);
+import auth from "../../middleware/auth.js"
+const categoryRouter = express.Router()
+categoryRouter.post("/", auth, uploadFile('image', 'category'), addcategory);
+categoryRouter.get("/", auth, getAllcategory);
+categoryRouter.get("/:id", auth, getSpacificcategory);
+categoryRouter.put("/:id", auth, uploadFile('image', 'category'), updatecategory);
+categoryRouter.delete("/:id", auth, deletecategory);
 
 export default categoryRouter

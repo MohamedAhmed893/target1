@@ -15,6 +15,10 @@ export const setupSocket = (server) => {
 
     // Handle other Socket.io events
   });
+  if (!io) {
+    throw new Error("Socket.io not initialized");
+  }
+  return io;
 };
 
 export const getIO = () => {

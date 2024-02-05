@@ -1,5 +1,5 @@
 import slugify from "slugify"
-import { productModel } from "../Models/productModel.js"
+import  productModel  from "../Models/productModel.js"
 import { AppError } from "../utils/AppError.js"
 import { catchAsyncError } from "../middleware/catchAsyncError.js"
 

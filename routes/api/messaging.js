@@ -1,12 +1,12 @@
 import express from "express";
 import Message from "../../Models/messageModel.js";
 import Conversation from "../../Models/conversationModel.js";
-import { setupSocket, getIO } from "../../socket.js";
-
+import { getIO, setupSocket } from "../../socket.js";
+import auth from '../../middleware/auth.js'
 const router = express.Router();
 
 // Send Message
-router.post("/api/messages", async (req, res) => {
+router.post("/api/messages", auth, async (req, res) => {
   try {
     // Extract required fields from request body
     const { senderId, receiverId, productId, content } = req.body;
@@ -35,7 +35,7 @@ router.post("/api/messages", async (req, res) => {
     await conversation.save();
 
     // Emit the message to the receiver if online
-    const io = getIO();
+    const io = setupSocket();
     const receiverSocket = io.sockets.sockets.get(receiverId);
     if (receiverSocket) {
       io.to(receiverSocket.id).emit("receive_private_message", message);
@@ -54,7 +54,7 @@ router.post("/api/messages", async (req, res) => {
 });
 
 // Update Message
-router.put("/api/messages/:messageId", async (req, res) => {
+router.put("/api/messages/:messageId", auth, async (req, res) => {
   try {
     // Extract required fields from request body
     const { content } = req.body;
@@ -68,7 +68,7 @@ router.put("/api/messages/:messageId", async (req, res) => {
     );
 
     // Emit event to notify clients about message update
-    const io = getIO();
+    const io = setupSocket();
     io.emit("message_updated", { messageId });
 
     // Respond with updated message data
@@ -84,7 +84,7 @@ router.put("/api/messages/:messageId", async (req, res) => {
 });
 
 // Delete Message
-router.delete("/api/messages/:messageId", async (req, res) => {
+router.delete("/api/messages/:messageId", auth, async (req, res) => {
   try {
     const messageId = req.params.messageId;
 
@@ -98,7 +98,7 @@ router.delete("/api/messages/:messageId", async (req, res) => {
     await Message.findByIdAndDelete(messageId);
 
     // Emit event to notify clients about message deletion
-    const io = getIO();
+    const io = setupSocket();
     io.emit("message_deleted", { messageId });
 
     // Respond with success message
@@ -113,7 +113,7 @@ router.delete("/api/messages/:messageId", async (req, res) => {
 });
 
 // Get Conversation
-router.get("/api/conversations/:senderId/:receiverId", async (req, res) => {
+router.get("/api/conversations/:senderId/:receiverId", auth, async (req, res) => {
   try {
     const senderId = req.params.senderId;
     const receiverId = req.params.receiverId;
@@ -141,13 +141,12 @@ router.get("/api/conversations/:senderId/:receiverId", async (req, res) => {
 });
 
 // Delete Conversation
-router.delete("/api/conversations/:conversationId", async (req, res) => {
+router.delete("/api/conversations/:conversationId", auth, async (req, res) => {
   try {
     const conversationId = req.params.conversationId;
 
     // Find the conversation to be deleted
     const conversation = await Conversation.findById(conversationId);
-
     // Delete associated messages
     await Message.deleteMany({ _id: { $in: conversation.messages } });
 
@@ -155,7 +154,7 @@ router.delete("/api/conversations/:conversationId", async (req, res) => {
     await Conversation.findByIdAndDelete(conversationId);
 
     // Emit event to notify clients about conversation deletion
-    const io = getIO();
+    const io = setupSocket();
     io.emit("conversation_deleted", { conversationId });
 
     // Respond with success message

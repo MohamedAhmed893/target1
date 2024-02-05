@@ -9,7 +9,7 @@ router.post("/cart", auth, async (req, res) => {
       productId: req.body.productId,
       quantity: Number.parseInt(req.body.quantity),
     };
-    const result = cart.addItemToCart(payload);
+    const result = await cart.addItemToCart(payload);
     if (!result) {
       res.status(400),
         json({
